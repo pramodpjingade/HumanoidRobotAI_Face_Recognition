@@ -1,0 +1,30 @@
+
+# Python virtual environment
+venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Personal face recognition data
+datasets/*
+!datasets/README.md
+
+# Voice recordings
+*.wav
+*.mp3
+
+# API keys and secrets
+.env
+.env.*
+!.env.example
+
+# Logs
+*.log
+*.csv
+
+# IDE and system files
+.vscode/
+.DS_Store
+Thumbs.db
