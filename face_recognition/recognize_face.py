@@ -14,8 +14,9 @@ with open(DATABASE, "r") as file:
 
 app = FaceAnalysis(
     name="buffalo_l",
-    providers=["CPUExecutionProvider"]
+    providers=["CUDAExecutionProvider", "CPUExecutionProvider"]
 )
+
 
 app.prepare(ctx_id=0, det_size=(640, 640))
 
@@ -43,6 +44,8 @@ while True:
 
     if not success:
         break
+
+    frame = cv2.flip(frame, 1)
 
     faces = app.get(frame)
 
