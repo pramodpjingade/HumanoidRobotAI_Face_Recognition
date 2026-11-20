@@ -9,7 +9,7 @@ DATABASE = BASE_DIR / "datasets" / "face_database.json"
 
 app = FaceAnalysis(
     name="buffalo_l",
-    providers=["CPUExecutionProvider"]
+    providers=["CUDAExecutionProvider", "CPUExecutionProvider"]
 )
 app.prepare(ctx_id=0, det_size=(640, 640))
 
@@ -25,7 +25,6 @@ if DATABASE.exists():
 else:
     database = {}
 
-# Convert old single embeddings into multiple-embedding format
 for person, data in database.items():
     if data and isinstance(data[0], (int, float)):
         database[person] = [data]
@@ -67,16 +66,21 @@ while len(embeddings) < 10:
 
     cv2.imshow("Advanced Face Registration", frame)
 
-    key = cv2.waitKey(1) & 0xFF
+    key = cv2.waitKey(30) & 0xFF
 
-    if key == ord('s'):
-        if len(faces) == 1:
+    if key == ord('s') or key == ord('S'):
+
+        if len(faces) == 0:
+            print("No face detected.")
+
+        elif len(faces) > 1:
+            print("Multiple faces detected. Keep only one person in the camera.")
+
+        else:
             embeddings.append(faces[0].normed_embedding.tolist())
             print(f"Sample {len(embeddings)} captured.")
-        else:
-            print("Keep exactly one face visible.")
 
-    if key == ord('q'):
+    elif key == ord('q') or key == ord('Q'):
         break
 
 camera.release()
