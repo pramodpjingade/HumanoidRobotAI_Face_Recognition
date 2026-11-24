@@ -7,7 +7,7 @@ import numpy as np
 SAMPLE_RATE = 16000
 DURATION = 8
 DEVICE_ID = 1
-PERSON_NAME = "PRAMOD"
+PERSON_NAME = "PRAMOD P JINGADE"
 
 SAVE_DIR = Path("datasets/voice_samples") / PERSON_NAME
 SAVE_DIR.mkdir(parents=True, exist_ok=True)
