@@ -28,3 +28,6 @@ datasets/*
 .vscode/
 .DS_Store
 Thumbs.db
+
+# Downloaded AI model weights
+/models/
